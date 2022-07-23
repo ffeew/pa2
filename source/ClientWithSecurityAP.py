@@ -79,7 +79,13 @@ def main(args):
 
 
                 case "3":
-                    auth_message = b"this is an authenticity test"
+                    # hash the auth_message before sending it
+                    auth_message = hashes.Hash(hashes.SHA256())
+                    # create a random message each time to prevent brute force
+                    nonce = secrets.token_bytes(32) # 256 bit nonce
+                    auth_message.update(nonce)
+                    auth_message = auth_message.finalize()
+
                     auth_message_size = len(auth_message)
                     s.sendall(convert_int_to_bytes(3))
                     s.sendall(convert_int_to_bytes(auth_message_size))
