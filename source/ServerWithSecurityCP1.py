@@ -94,8 +94,12 @@ def main(args):
     
                             encrypted_file_data = read_bytes(client_socket, file_len)
                             
+                            filename_list = filename.split("/")
+
+                            with open("./recv_files_enc/enc_recv_"+filename_list[-1], "wb") as fout:
+                                fout.write(encrypted_file_data)
+
                             decrypted_file_data = b""
-                            print(private_key)
                             
                             # the file length will always be a multiple of 128 bytes
                             # since the encryption always pad each block up to 128 bytes
@@ -110,7 +114,6 @@ def main(args):
                                                                     label=None
                                                                 )
                                                             )
-                                print(partial_decrypted_file_data)
                                 decrypted_file_data += partial_decrypted_file_data
 
                             filename = "recv_" + filename.split("/")[-1]

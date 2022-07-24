@@ -142,7 +142,10 @@ def main(args):
                     ciphertext+=partial_ciphertext
                     data = fp.read(62)
 
-                print(ciphertext)
+                filename_list = filename.split("/")
+                with open("./send_files_enc/enc_"+filename_list[-1], mode = "wb") as fout:
+                    fout.write(ciphertext)
+
                 s.sendall(convert_int_to_bytes(1))
                 s.sendall(convert_int_to_bytes(len(ciphertext)))
                 s.sendall(ciphertext)

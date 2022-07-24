@@ -93,6 +93,11 @@ def main(args):
                             )
     
                             encrypted_file_data = read_bytes(client_socket, file_len)
+                            
+                            filename_list = filename.split("/")
+
+                            with open("./recv_files_enc/enc_recv_"+filename_list[-1], mode = "wb") as fout:
+                                fout.write(encrypted_file_data)
 
                             f = Fernet(decrypted_session_key)
                             decrypted_file_data = f.decrypt(encrypted_file_data)

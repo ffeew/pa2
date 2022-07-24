@@ -26,12 +26,12 @@ os.chdir("./source")
 print(f"Spawning Server and Client CP{version}")
 print(f"It might take awhile, so be patient...")
 p_server = subprocess.Popen(
-    ["python3", f"ServerWithSecurityCP{version}.py"],
+    ["python3.10", f"ServerWithSecurityCP{version}.py"],
     stdout=output_file_server,
 )
 time.sleep(1)
 p_client = subprocess.Popen(
-    ["python3", f"ClientWithSecurityCP{version}.py"],
+    ["python3.10", f"ClientWithSecurityCP{version}.py"],
     stdin=input_file,
     stdout=output_file_client,
 )

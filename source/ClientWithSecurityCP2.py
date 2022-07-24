@@ -148,6 +148,10 @@ def main(args):
                 f = Fernet(session_key)
                 ciphertext = f.encrypt(data)
 
+                filename_list = filename.split("/")
+                with open("./send_files_enc/enc_"+filename_list[-1], mode = "wb") as fout:
+                    fout.write(ciphertext)
+
                 print(ciphertext)
                 s.sendall(convert_int_to_bytes(1))
                 s.sendall(convert_int_to_bytes(len(ciphertext)))
